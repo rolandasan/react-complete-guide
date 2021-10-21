@@ -1,9 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ExpenseItem } from './ExpenseItem';
+import { Expense } from '../models/Expense';
 
 test('render ExpenseItem component', () => {
-    render(<ExpenseItem title='expense title' amount={10.4} date={new Date(2021, 10, 12, 5, 13)} />);
+    const expenseTestItem: Expense = {
+        id: '1',
+        title: 'expense title',
+        amount: 10.4,
+        date: new Date(2021, 10, 12, 5, 13),
+    };
+
+    render(<ExpenseItem expense={expenseTestItem} />);
     const expenseItemComponent = screen.getByTestId('expense-item');
     expect(expenseItemComponent).toBeInTheDocument();
 
