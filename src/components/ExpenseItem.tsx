@@ -1,7 +1,8 @@
 import React from 'react';
 import './ExpenseItem.css';
+import { Expense } from '../models/Expense';
 
-export const ExpenseItem: React.FC<{ title: string, amount: number, date: Date }> = (props) => {
+export const ExpenseItem: React.FC<Expense> = (props) => {
     return (
         <div data-testid='expense-item' className='expense-item'>
             <div data-testid='expense-item-date'>{props.date.toISOString()}</div>
