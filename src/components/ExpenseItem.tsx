@@ -2,9 +2,7 @@ import React from 'react';
 import './ExpenseItem.css';
 
 export const ExpenseItem: React.FC<{ title: string, amount: number, date: Date }> = (props) => {
-    const expenseDate = props.date;
-    const expenseDescription = props.title;
-    const expenseAmount = props.amount;
+    const {date: expenseDate, title: expenseDescription, amount: expenseAmount} = props;
 
     return (
         <div data-testid='expense-item' className='expense-item'>
