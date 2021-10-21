@@ -1,4 +1,5 @@
 import React from 'react';
+import './ExpenseDate.css';
 
 interface ExpenseDateProps {
     date: Date;
@@ -10,10 +11,10 @@ export const ExpenseDate: React.FC<ExpenseDateProps> = (props) => {
     const expenseDateDay = props.date.getDate();
 
     return (
-        <div data-testid='expense-item-date'>
-            <div data-testid='expense-item-date-year'>{expenseDateYear}</div>
-            <div data-testid='expense-item-date-month'>{expenseDateMonth}</div>
-            <div data-testid='expense-item-date-day'>{expenseDateDay}</div>
+        <div data-testid='expense-item-date' className='expense-date'>
+            <div data-testid='expense-item-date-year' className='expense-date__year'>{expenseDateYear}</div>
+            <div data-testid='expense-item-date-month' className='expense-date__month'>{expenseDateMonth}</div>
+            <div data-testid='expense-item-date-day' className='expense-date__day'>{expenseDateDay}</div>
         </div>
     );
 };
