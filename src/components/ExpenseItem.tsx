@@ -1,10 +1,10 @@
 import React from 'react';
 import './ExpenseItem.css';
 
-export const ExpenseItem: React.FC = () => {
-    const expenseDate = new Date(2021, 9, 21);
-    const expenseDescription = 'Car Insurance';
-    const expenseAmount = 372.56;
+export const ExpenseItem: React.FC<{ title: string, amount: number, date: Date }> = (props) => {
+    const expenseDate = props.date;
+    const expenseDescription = props.title;
+    const expenseAmount = props.amount;
 
     return (
         <div data-testid='expense-item' className='expense-item'>
