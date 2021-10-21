@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Expense } from './models/Expense';
-import { Expenses } from './components/Expenses';
+import { Expenses } from './components/expenses/Expenses';
 
 export const App: React.FC = () => {
     const expenses: Expense[] = [

@@ -1,8 +1,8 @@
 import React from 'react';
 import './ExpenseItem.css';
-import { Expense } from '../models/Expense';
+import { Expense } from '../../models/Expense';
 import { ExpenseDate } from './ExpenseDate';
-import { Card } from './Card';
+import { Card } from '../ui/Card';
 
 interface ExpenseItemProps {
     expense: Expense;

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Expenses } from './Expenses';
-import { Expense } from '../models/Expense';
+import { Expense } from '../../models/Expense';
 
 test('render Expenses component', () => {
     const expenseList: Expense[] = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ExpenseItem } from './ExpenseItem';
-import { Expense } from '../models/Expense';
+import { Expense } from '../../models/Expense';
 
 test('render ExpenseItem component', () => {
     const expenseTestItem: Expense = {
