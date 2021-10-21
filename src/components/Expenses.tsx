@@ -2,6 +2,7 @@ import { Expense } from '../models/Expense';
 import { ExpenseItem } from './ExpenseItem';
 import React from 'react';
 import './Expenses.css';
+import { Card } from './Card';
 
 interface ExpensesProps {
     expenses: Expense[];
@@ -9,10 +10,10 @@ interface ExpensesProps {
 
 export const Expenses: React.FC<ExpensesProps> = (props) => {
     return (
-        <div className='expenses' data-testid='expenses'>
+        <Card className='expenses' data-testid='expenses'>
             {props.expenses.map((e) => {
                 return <ExpenseItem expense={e} key={e.id} />;
             })}
-        </div>
+        </Card>
     );
 };

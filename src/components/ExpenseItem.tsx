@@ -2,6 +2,7 @@ import React from 'react';
 import './ExpenseItem.css';
 import { Expense } from '../models/Expense';
 import { ExpenseDate } from './ExpenseDate';
+import { Card } from './Card';
 
 interface ExpenseItemProps {
     expense: Expense;
@@ -9,7 +10,7 @@ interface ExpenseItemProps {
 
 export const ExpenseItem: React.FC<ExpenseItemProps> = (props) => {
     return (
-        <div data-testid='expense-item' className='expense-item'>
+        <Card className='expense-item' data-testid='expense-item'>
             <ExpenseDate date={props.expense.date} />
             <div className='expense-item__description'>
                 <h2 data-testid='expense-item-description'>{props.expense.title}</h2>
@@ -17,6 +18,6 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = (props) => {
                     €{props.expense.amount}
                 </div>
             </div>
-        </div>
+        </Card>
     );
 };
