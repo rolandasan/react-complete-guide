@@ -21,9 +21,9 @@ export const Expenses: React.FC<ExpensesProps> = (props) => {
                 <ExpenseFilter onFilterChange={filterChangeHandler} />
                 {props.expenses
                     .filter((e) => e.date.getFullYear() === expenseYear)
-                    .map((e) => {
-                        return <ExpenseItem expense={e} key={e.id} />;
-                    })}
+                    .map((e) => (
+                        <ExpenseItem expense={e} key={e.id} />
+                    ))}
             </Card>
         </div>
     );
