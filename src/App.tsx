@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Expense } from './models/Expense';
 import { Expenses } from './components/expenses/Expenses';
+import { NewExpense } from './components/NewExpense/NewExpense';
 
 export const App: React.FC = () => {
     const expenses: Expense[] = [
@@ -13,7 +14,7 @@ export const App: React.FC = () => {
 
     return (
         <div className='App'>
-            <h2>Lets get started!</h2>
+            <NewExpense />
             <Expenses expenses={expenses} />
         </div>
     );
