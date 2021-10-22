@@ -12,9 +12,14 @@ export const App: React.FC = () => {
         { id: 'e4', title: 'Car repair', amount: 459.4, date: new Date(2021, 11, 4) },
     ];
 
+    const addExpenseHandler = (newExpense: Expense): void => {
+        expenses.push(newExpense);
+        console.debug(expenses);
+    };
+
     return (
         <div className='App'>
-            <NewExpense />
+            <NewExpense onAddExpense={addExpenseHandler} />
             <Expenses expenses={expenses} />
         </div>
     );

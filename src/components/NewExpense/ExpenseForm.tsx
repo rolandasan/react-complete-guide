@@ -1,7 +1,16 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import './ExpenseForm.css';
+interface ExpenseData {
+    title: string;
+    amount: number;
+    date: Date;
+}
 
-export const ExpenseForm: React.FC = () => {
+interface ExpenseFormProps {
+    onNewExpense: (newExpense: ExpenseData) => void;
+}
+
+export const ExpenseForm: React.FC<ExpenseFormProps> = (props) => {
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
@@ -18,11 +27,13 @@ export const ExpenseForm: React.FC = () => {
 
     const submitHandler = (event: FormEvent) => {
         event.preventDefault();
-        const expenseEntered: { title: string; amount: number; date: Date } = {
+        const expenseEntered: ExpenseData = {
             title: enteredTitle,
             amount: +enteredAmount,
             date: new Date(enteredDate),
         };
+
+        props.onNewExpense(expenseEntered);
 
         setEnteredTitle('');
         setEnteredAmount('');
