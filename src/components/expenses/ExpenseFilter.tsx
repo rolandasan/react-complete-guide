@@ -18,19 +18,11 @@ export const ExpenseFilter: React.FC<ExpenseFilterProps> = (props) => {
         <div className='expenses-filter'>
             <div className='expenses-filter__control'>
                 <label>Filter by year</label>
-                <select onChange={onYearChangeHandler}>
-                    <option selected={filterYear === 2022} value='2022'>
-                        2022
-                    </option>
-                    <option selected={filterYear === 2021} value='2021'>
-                        2021
-                    </option>
-                    <option selected={filterYear === 2020} value='2020'>
-                        2020
-                    </option>
-                    <option selected={filterYear === 2019} value='2019'>
-                        2019
-                    </option>
+                <select value={filterYear} onChange={onYearChangeHandler}>
+                    <option value='2022'>2022</option>
+                    <option value='2021'>2021</option>
+                    <option value='2020'>2020</option>
+                    <option value='2019'>2019</option>
                 </select>
             </div>
         </div>
