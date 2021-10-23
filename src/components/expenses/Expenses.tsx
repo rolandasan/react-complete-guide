@@ -15,15 +15,14 @@ export const Expenses: React.FC<ExpensesProps> = (props) => {
         setExpenseYear(filterYear);
     };
 
+    const filteredExpenses = props.expenses.filter((e) => e.date.getFullYear() === expenseYear);
     return (
         <div>
             <Card className='expenses' data-testid='expenses'>
                 <ExpenseFilter onFilterChange={filterChangeHandler} />
-                {props.expenses
-                    .filter((e) => e.date.getFullYear() === expenseYear)
-                    .map((e) => (
-                        <ExpenseItem expense={e} key={e.id} />
-                    ))}
+                {filteredExpenses.map((e) => (
+                    <ExpenseItem expense={e} key={e.id} />
+                ))}
             </Card>
         </div>
     );
