@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import './Expenses.css';
 import { Card } from '../ui/Card';
 import { ExpenseFilter } from './ExpenseFilter';
+import {ExpensesList} from "./ExpensesList";
 
 interface ExpensesProps {
     expenses: Expense[];
@@ -20,9 +21,7 @@ export const Expenses: React.FC<ExpensesProps> = (props) => {
         <div>
             <Card className='expenses' data-testid='expenses'>
                 <ExpenseFilter onFilterChange={filterChangeHandler} />
-                {filteredExpenses.map((e) => (
-                    <ExpenseItem expense={e} key={e.id} />
-                ))}
+                <ExpensesList expenses={filteredExpenses} />
             </Card>
         </div>
     );
