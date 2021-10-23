@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Expense } from './models/Expense';
-import { Expenses } from './components/expenses/Expenses';
+import { Expenses } from './components/Expenses/Expenses';
 import { NewExpense } from './components/NewExpense/NewExpense';
 
 const initialExpenses: Expense[] = [
