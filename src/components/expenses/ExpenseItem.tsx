@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ExpenseItem.css';
 import { ExpenseDate } from './ExpenseDate';
 import { Card } from '../ui/Card';
@@ -9,19 +9,13 @@ interface ExpenseItemProps {
 }
 
 export const ExpenseItem: React.FC<ExpenseItemProps> = (props) => {
-    const [expense, setExpense] = useState(props.expense);
-
-    const clickHandler = () => {
-        setExpense({ id: 'e5', title: 'Updated title', amount: 34.5, date: new Date(2021, 9, 22, 9, 7) });
-    };
-
     return (
         <Card className='expense-item' data-testid='expense-item'>
-            <ExpenseDate date={expense.date} />
+            <ExpenseDate date={props.expense.date} />
             <div className='expense-item__description'>
-                <h2 data-testid='expense-item-description'>{expense.title}</h2>
+                <h2 data-testid='expense-item-description'>{props.expense.title}</h2>
                 <div data-testid='expense-item-price' className='expense-item__price'>
-                    €{expense.amount}
+                    €{props.expense.amount}
                 </div>
             </div>
         </Card>
