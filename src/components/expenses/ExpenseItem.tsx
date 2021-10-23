@@ -23,7 +23,6 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = (props) => {
                 <div data-testid='expense-item-price' className='expense-item__price'>
                     €{expense.amount}
                 </div>
-                <button onClick={clickHandler}>Change Title</button>
             </div>
         </Card>
     );
