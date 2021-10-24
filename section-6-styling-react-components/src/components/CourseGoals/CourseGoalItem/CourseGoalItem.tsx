@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './CourseGoalItem.css';
+import styles from './CourseGoalItem.module.css';
 
 interface CourseGoalItemProps {
     id: string;
@@ -16,7 +16,7 @@ export const CourseGoalItem: React.FC<CourseGoalItemProps> = (props) => {
     };
 
     return (
-        <li className='goal-item' onClick={deleteHandler}>
+        <li className={styles.goalItem} onClick={deleteHandler}>
             {props.children}
         </li>
     );

@@ -20,8 +20,7 @@ export const App: React.FC = () => {
 
     const deleteItemHandler = (goalId: string) => {
         setCourseGoals((prevGoals) => {
-            const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
-            return updatedGoals;
+            return prevGoals.filter((goal) => goal.id !== goalId);
         });
     };
 
