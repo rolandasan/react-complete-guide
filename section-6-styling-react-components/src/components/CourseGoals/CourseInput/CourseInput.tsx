@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Button } from '../../UI/Button/Button';
-import styles from './CourseInput.module.css';
+import './CourseInput.css';
 
 interface CourseInputProps {
     onAddGoal: (goal: string) => void;
@@ -29,7 +29,7 @@ export const CourseInput: React.FC<CourseInputProps> = (props) => {
 
     return (
         <form onSubmit={formSubmitHandler}>
-            <div className={`${styles['form-control']} ${!isValid && styles.invalid}`}>
+            <div className={`form-control ${!isValid && 'invalid'}`}>
                 <label>Course Goal</label>
                 <input type='text' onChange={goalInputChangeHandler} />
             </div>

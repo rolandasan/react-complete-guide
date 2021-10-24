@@ -1,6 +1,6 @@
 import React, { FormEvent, PropsWithChildren } from 'react';
 
-import styles from './Button.module.css';
+import './Button.css';
 
 export const Button: React.FC<
     PropsWithChildren<{
@@ -9,7 +9,7 @@ export const Button: React.FC<
     }>
 > = (props) => {
     return (
-        <button type={props.type} className={styles.button} onClick={props.onClick}>
+        <button type={props.type} className='button' onClick={props.onClick}>
             {props.children}
         </button>
     );

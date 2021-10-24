@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './CourseGoalList.module.css';
+import './CourseGoalList.css';
 import { CourseGoalItem } from '../CourseGoalItem/CourseGoalItem';
 import { CourseGoal } from '../../../model/CourseGoal';
 
@@ -11,7 +11,7 @@ interface CourseGoalListProps {
 
 export const CourseGoalList: React.FC<CourseGoalListProps> = (props) => {
     return (
-        <ul className={styles.goalList}>
+        <ul className='goal-list'>
             {props.items.map((goal) => (
                 <CourseGoalItem key={goal.id} id={goal.id} onDelete={props.onDeleteItem}>
                     {goal.text}
