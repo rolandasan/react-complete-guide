@@ -2,6 +2,7 @@ import React, {
   ChangeEvent,
   FormEvent,
   PropsWithChildren,
+  useEffect,
   useReducer,
   useState,
 } from "react";
@@ -67,16 +68,21 @@ export const Login: React.FC<LoginProps> = (props) => {
     isValid: true,
   });
 
+  useEffect(() => {
+    const inputDebounce = setTimeout(() => {
+      setFormIsValid(emailState.isValid && passwordState.isValid);
+    }, 500);
+    return () => {
+      clearTimeout(inputDebounce);
+    };
+  }, [emailState.isValid, passwordState.isValid]);
+
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     dispatchEmail({ type: "user-input", value: event.target.value });
-    setFormIsValid(
-      event.target.value.includes("@") && passwordState.value.length > 6
-    );
   };
 
   const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     dispatchPassword({ type: "user-input", value: event.target.value });
-    setFormIsValid(emailState.isValid && event.target.value.length > 6);
   };
 
   const validateEmailHandler = () => {
@@ -89,7 +95,7 @@ export const Login: React.FC<LoginProps> = (props) => {
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    props.onLogin(emailState.value || "", passwordState.value);
+    props.onLogin(emailState.value, passwordState.value);
   };
 
   return (
