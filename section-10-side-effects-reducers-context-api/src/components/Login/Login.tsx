@@ -34,7 +34,7 @@ const emailReducer = (
   if (action.type === "validate-input") {
     return {
       value: state.value as string,
-      isValid: state.value.includes("@"),
+      isValid: state.value.trim().includes("@"),
     };
   }
   return { value: "", isValid: false };
@@ -45,12 +45,12 @@ const passwordReducer = (
   action: reducerAction
 ): reducerState => {
   if (action.type === "user-input") {
-    return { value: action.value, isValid: action.value.length > 6 };
+    return { value: action.value, isValid: action.value.trim().length > 6 };
   }
   if (action.type === "validate-input") {
     return {
-      value: state.value as string,
-      isValid: state.value.length > 6,
+      value: state.value,
+      isValid: state.value.trim().length > 6,
     };
   }
   return { value: "", isValid: false };
@@ -61,11 +61,11 @@ export const Login: React.FC<LoginProps> = (props) => {
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
-    isValid: true,
+    isValid: false,
   });
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
     value: "",
-    isValid: true,
+    isValid: false,
   });
 
   const { isValid: isEmailValid } = emailState;

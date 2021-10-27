@@ -4,7 +4,7 @@ import { Navigation } from "./Navigation";
 import classes from "./MainHeader.module.css";
 
 type MainHeaderProps = PropsWithChildren<{
-  isAuthenticated: boolean;
+  // isAuthenticated: boolean;
   onLogout: (event: FormEvent) => void;
 }>;
 
@@ -13,7 +13,7 @@ export const MainHeader: React.FC<MainHeaderProps> = (props) => {
     <header className={classes["main-header"]}>
       <h1>A Typical Page</h1>
       <Navigation
-        isLoggedIn={props.isAuthenticated}
+        // isLoggedIn={props.isAuthenticated}
         onLogout={props.onLogout}
       />
     </header>
