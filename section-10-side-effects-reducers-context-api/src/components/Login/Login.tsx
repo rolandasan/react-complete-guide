@@ -68,14 +68,18 @@ export const Login: React.FC<LoginProps> = (props) => {
     isValid: true,
   });
 
+  const { isValid: isEmailValid } = emailState;
+  const { isValid: isPasswordValid } = passwordState;
+
   useEffect(() => {
     const inputDebounce = setTimeout(() => {
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      console.log("Validating form");
+      setFormIsValid(isEmailValid && isPasswordValid);
     }, 500);
     return () => {
       clearTimeout(inputDebounce);
     };
-  }, [emailState.isValid, passwordState.isValid]);
+  }, [isEmailValid, isPasswordValid]);
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     dispatchEmail({ type: "user-input", value: event.target.value });
