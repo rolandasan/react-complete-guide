@@ -1,7 +1,7 @@
 import React, {
   ChangeEvent,
   FormEvent,
-  PropsWithChildren,
+  useContext,
   useEffect,
   useReducer,
   useState,
@@ -10,10 +10,7 @@ import React, {
 import { Card } from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import { Button } from "../UI/Button/Button";
-
-type LoginProps = PropsWithChildren<{
-  onLogin: (user: string, pass: string) => void;
-}>;
+import { AuthContext } from "../../context/AuthContext";
 
 type reducerState = {
   value: string;
@@ -56,7 +53,7 @@ const passwordReducer = (
   return { value: "", isValid: false };
 };
 
-export const Login: React.FC<LoginProps> = (props) => {
+export const Login: React.FC = () => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -99,9 +96,10 @@ export const Login: React.FC<LoginProps> = (props) => {
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
+  const authCtx = useContext(AuthContext);
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>

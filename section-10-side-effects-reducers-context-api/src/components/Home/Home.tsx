@@ -1,11 +1,9 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
 import { Card } from "../UI/Card/Card";
 import classes from "./Home.module.css";
 
-type HomeProps = PropsWithChildren<{ onLogout: () => void }>;
-
-export const Home: React.FC<HomeProps> = () => {
+export const Home: React.FC = () => {
   return (
     <Card className={classes.home}>
       <h1>Welcome back!</h1>
