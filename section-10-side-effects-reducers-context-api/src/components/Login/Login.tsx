@@ -2,8 +2,8 @@ import React, {
   ChangeEvent,
   FormEvent,
   PropsWithChildren,
+  useReducer,
   useState,
-  useEffect,
 } from "react";
 
 import { Card } from "../UI/Card/Card";
@@ -14,43 +14,82 @@ type LoginProps = PropsWithChildren<{
   onLogin: (user: string, pass: string) => void;
 }>;
 
+type reducerState = {
+  value: string;
+  isValid: boolean;
+};
+
+type reducerAction =
+  | { type: "user-input"; value: string }
+  | { type: "validate-input" };
+
+const emailReducer = (
+  state: reducerState,
+  action: reducerAction
+): reducerState => {
+  if (action.type === "user-input") {
+    return { value: action.value, isValid: action.value.includes("@") };
+  }
+  if (action.type === "validate-input") {
+    return {
+      value: state.value as string,
+      isValid: state.value.includes("@"),
+    };
+  }
+  return { value: "", isValid: false };
+};
+
+const passwordReducer = (
+  state: reducerState,
+  action: reducerAction
+): reducerState => {
+  if (action.type === "user-input") {
+    return { value: action.value, isValid: action.value.length > 6 };
+  }
+  if (action.type === "validate-input") {
+    return {
+      value: state.value as string,
+      isValid: state.value.length > 6,
+    };
+  }
+  return { value: "", isValid: false };
+};
+
 export const Login: React.FC<LoginProps> = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState<boolean>();
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState<boolean>();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(() => {
-    const validationTimeout = setTimeout(() => {
-      setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
-      );
-    }, 500);
-    return () => {
-      clearTimeout(validationTimeout);
-    };
-  }, [enteredEmail, enteredPassword]);
+  const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    value: "",
+    isValid: true,
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: true,
+  });
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredEmail(event.target.value);
+    dispatchEmail({ type: "user-input", value: event.target.value });
+    setFormIsValid(
+      event.target.value.includes("@") && passwordState.value.length > 6
+    );
   };
 
   const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredPassword(event.target.value);
+    dispatchPassword({ type: "user-input", value: event.target.value });
+    setFormIsValid(emailState.isValid && event.target.value.length > 6);
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes("@"));
+    dispatchEmail({ type: "validate-input" });
   };
 
   const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
+    dispatchPassword({ type: "validate-input" });
   };
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
+    props.onLogin(emailState.value || "", passwordState.value);
   };
 
   return (
@@ -58,28 +97,28 @@ export const Login: React.FC<LoginProps> = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ""
+            emailState.isValid === false ? classes.invalid : ""
           }`}
         >
           <label htmlFor="email">E-Mail</label>
           <input
             type="email"
             id="email"
-            value={enteredEmail}
+            value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
         </div>
         <div
           className={`${classes.control} ${
-            passwordIsValid === false ? classes.invalid : ""
+            passwordState.isValid === false ? classes.invalid : ""
           }`}
         >
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            value={enteredPassword}
+            value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
