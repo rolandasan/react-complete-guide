@@ -16,8 +16,8 @@ export const App: React.FC = () => {
 
     return (
         <>
-            {showCart && <Cart onClose={hideCartHandler}/>}
-            <Header onShowCart={showCartHandler}/>
+            {showCart && <Cart onClose={hideCartHandler} />}
+            <Header onShowCart={showCartHandler} />
             <main>
                 <Meals />
             </main>

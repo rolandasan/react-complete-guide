@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Modal.module.css';
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 
 interface ModalProps {
     onClose: () => void;
@@ -15,7 +15,7 @@ interface ModalOverlayProps {
 }
 
 export const Backdrop: React.FC<BackdropProps> = (props) => {
-    return <div className={classes.backdrop} onClick={props.onClose}/>;
+    return <div className={classes.backdrop} onClick={props.onClose} />;
 };
 
 export const ModalOverlay: React.FC<ModalOverlayProps> = (props) => {
@@ -28,9 +28,10 @@ export const ModalOverlay: React.FC<ModalOverlayProps> = (props) => {
 
 const portalElement = document.getElementById('overlays')!;
 export const Modal: React.FC<ModalProps> = (props) => {
-    return <>
-        {ReactDOM.createPortal(<Backdrop onClose={props.onClose}/>, portalElement)}
-        {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElement)}
-
-    </>;
+    return (
+        <>
+            {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
+            {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElement)}
+        </>
+    );
 };
