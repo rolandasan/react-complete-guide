@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ForwardedRef } from 'react';
 import classes from './Input.module.css';
 
 interface Props {
@@ -6,11 +6,11 @@ interface Props {
     input: any;
 }
 
-export const Input: React.FC<Props> = (props) => {
+export const Input = React.forwardRef((props: Props, ref: ForwardedRef<HTMLInputElement>) => {
     return (
         <div className={classes.input}>
             <label htmlFor={props.input.id}>{props.inputLabel}</label>
-            <input {...props.input} />
+            <input ref={ref} {...props.input} />
         </div>
     );
-};
+});
