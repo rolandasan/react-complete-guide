@@ -1,8 +1,9 @@
-import React, {PropsWithChildren} from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import classes from './Button.module.css';
 
-export const Button: React.FC<PropsWithChildren<any>> = (props) => {
+export const Button: React.FC<PropsWithChildren<any>> = React.memo((props) => {
+    console.debug('Button');
     return (
         <button
             type={props.type || 'button'}
@@ -13,4 +14,4 @@ export const Button: React.FC<PropsWithChildren<any>> = (props) => {
             {props.children}
         </button>
     );
-};
+});
