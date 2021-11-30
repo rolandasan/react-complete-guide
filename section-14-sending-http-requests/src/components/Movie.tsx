@@ -17,5 +17,3 @@ export const Movie: React.FC<Props> = (props) => {
         </li>
     );
 };
-
-export default Movie;

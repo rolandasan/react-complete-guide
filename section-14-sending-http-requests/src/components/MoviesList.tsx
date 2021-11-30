@@ -7,7 +7,7 @@ interface Props {
     movies: { id: number; title: string; openingText: string; releaseDate: string }[];
 }
 
-export const MovieList: React.FC<Props> = (props) => {
+export const MoviesList: React.FC<Props> = (props) => {
     return (
         <ul className={classes['movies-list']}>
             {props.movies.map((movie) => (
@@ -16,5 +16,3 @@ export const MovieList: React.FC<Props> = (props) => {
         </ul>
     );
 };
-
-export default MovieList;
