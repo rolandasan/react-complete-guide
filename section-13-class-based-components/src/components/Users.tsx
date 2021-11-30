@@ -27,6 +27,12 @@ export class Users extends Component<Props, State> {
         };
     }
 
+    componentDidUpdate() {
+        if (this.props.users.length === 0) {
+            throw new Error('No users provides!');
+        }
+    }
+
     private toggleUsersHandler = () => {
         this.setState((curState) => {
             return {
