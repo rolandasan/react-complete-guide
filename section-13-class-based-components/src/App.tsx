@@ -1,10 +1,10 @@
-import { Users } from './components/Users';
 import React from 'react';
+import { UserFinder } from './components/UserFinder';
 
 export const App: React.FC = () => {
     return (
         <div>
-            <Users />
+            <UserFinder />
         </div>
     );
 };

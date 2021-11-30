@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { User } from './User';
 
 import classes from './Users.module.css';
@@ -11,13 +11,19 @@ const DUMMY_USERS = [
 
 interface State {
     showUsers: boolean;
+    users: User[];
 }
 
-export class Users extends Component<{}, State> {
+interface Props {
+    users: { id: string; name: string }[];
+}
+
+export class Users extends Component<Props, State> {
     constructor() {
-        super({}, {});
+        super({ users: [] }, {});
         this.state = {
             showUsers: false,
+            users: [],
         };
     }
 
@@ -32,7 +38,7 @@ export class Users extends Component<{}, State> {
     render() {
         const usersList = (
             <ul>
-                {DUMMY_USERS.map((user) => (
+                {this.props.users.map((user) => (
                     <User key={user.id} name={user.name} />
                 ))}
             </ul>
