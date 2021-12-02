@@ -4,7 +4,7 @@ import { Movie } from './Movie';
 import classes from './MoviesList.module.css';
 
 interface Props {
-    movies: { id: number; title: string; openingText: string; releaseDate: string }[];
+    movies: { id: string; title: string; openingText: string; releaseDate: string }[];
 }
 
 export const MoviesList: React.FC<Props> = (props) => {
