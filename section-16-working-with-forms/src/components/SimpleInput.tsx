@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useRef, useState} from 'react';
+import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 export const SimpleInput: React.FC = () => {
     const [enteredName, setEnteredName] = useState('');
@@ -10,15 +10,18 @@ export const SimpleInput: React.FC = () => {
 
     const formSubmitHandler = (event: FormEvent) => {
         event.preventDefault();
+        if (enteredName.trim() === '') {
+            return;
+        }
         console.debug('onChange', enteredName);
-        console.debug('ref',nameInputRef.current!.value );
+        console.debug('ref', nameInputRef.current!.value);
     };
 
     return (
         <form onSubmit={formSubmitHandler}>
             <div className='form-control'>
                 <label htmlFor='name'>Your Name</label>
-                <input type='text' id='name' onChange={inputChangeHandler} ref={nameInputRef}/>
+                <input type='text' id='name' onChange={inputChangeHandler} ref={nameInputRef} />
             </div>
             <div className='form-actions'>
                 <button>Submit</button>
