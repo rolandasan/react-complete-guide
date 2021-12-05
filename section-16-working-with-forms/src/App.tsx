@@ -1,10 +1,10 @@
 import React from 'react';
-import { SimpleInput } from './components/SimpleInput';
+import { BasicForm } from './components/BasicForm';
 
 export const App: React.FC = () => {
     return (
         <div className='app'>
-            <SimpleInput />
+            <BasicForm />
         </div>
     );
 };
