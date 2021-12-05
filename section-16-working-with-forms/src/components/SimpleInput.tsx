@@ -8,11 +8,16 @@ export const SimpleInput: React.FC = () => {
     const nameInputInvalid = !enteredNameIsValid && enteredNameTouched;
     const inputClasses = nameInputInvalid ? 'form-control invalid' : 'form-control';
 
+    let formIsValid = false;
+    if (enteredNameIsValid) {
+        formIsValid = true;
+    }
+
     const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setEnteredName(event.target.value);
     };
 
-    const inputBlurHandler = (event: FocusEvent<HTMLInputElement>) => {
+    const inputBlurHandler = (_event: FocusEvent<HTMLInputElement>) => {
         setEnteredNameTouched(true);
     };
 
@@ -34,7 +39,7 @@ export const SimpleInput: React.FC = () => {
                 {nameInputInvalid && <p className='error-text'>Name must be not empty</p>}
             </div>
             <div className='form-actions'>
-                <button>Submit</button>
+                <button disabled={!formIsValid}>Submit</button>
             </div>
         </form>
     );
