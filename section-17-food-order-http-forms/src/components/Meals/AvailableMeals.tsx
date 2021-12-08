@@ -7,10 +7,14 @@ import { MealItem } from './MealItem/MealItem';
 export const AvailableMeals: React.FC = () => {
     const [meals, setMeals] = useState<Meal[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState<string>('');
 
     useEffect(() => {
         const fetchMeals = async () => {
             const response = await fetch('https://react-complete-guide-63504-default-rtdb.europe-west1.firebasedatabase.app/meals.json');
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }
             const responseData = await response.json();
             const loadedMeals = [];
             for (const key in responseData) {
@@ -24,7 +28,11 @@ export const AvailableMeals: React.FC = () => {
             setMeals(loadedMeals);
             setIsLoading(false);
         };
-        fetchMeals();
+
+        fetchMeals().catch((error) => {
+            setIsLoading(false);
+            setIsError(error.message);
+        });
     }, []);
 
     if (isLoading) {
@@ -35,6 +43,13 @@ export const AvailableMeals: React.FC = () => {
         );
     }
 
+    if (isError) {
+        return (
+            <section className={classes.MealsError}>
+                <p>{isError}</p>
+            </section>
+        );
+    }
     const mealsList = meals.map((meal) => <MealItem key={meal.id} meal={meal} />);
     return (
         <section className={classes.meals}>
