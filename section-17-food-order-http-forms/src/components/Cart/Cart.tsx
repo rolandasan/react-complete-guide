@@ -24,6 +24,23 @@ export const Cart: React.FC<Props> = (props) => {
         setIsCheckout(true);
     };
     const [isCheckout, setIsCheckout] = useState(false);
+    const [isSubmiting, setIsSubmiting] = useState(false);
+    const [didSubmit, setDidSubmit] = useState(false);
+
+    const submitOrderHandler = async (userData: { name: string; street: string; city: string; postalCode: string }) => {
+        setIsSubmiting(true);
+        await fetch('https://react-complete-guide-63504-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+            method: 'POST',
+            body: JSON.stringify({
+                user: userData,
+                orderedItems: cartCtx.items,
+            }),
+        });
+        setIsSubmiting(false);
+        setDidSubmit(true);
+        cartCtx.clearCart();
+    };
+
     const cartItems = (
         <ul className={classes.cartItems}>
             {cartCtx.items.map((i) => (
@@ -51,15 +68,33 @@ export const Cart: React.FC<Props> = (props) => {
             )}
         </div>
     );
-    return (
-        <Modal onClose={props.onClose}>
+    const cartModalContent = (
+        <>
             {cartItems}
             <div className={classes.total}>
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
-            {isCheckout && <Checkout onCancel={props.onClose} />}
+            {isCheckout && <Checkout onSubmit={submitOrderHandler} onCancel={props.onClose} />}
             {!isCheckout && modalActions}
+        </>
+    );
+    const submitingModalContent = <p>Sending order data ...</p>;
+    const didSubmitModalContent = (
+        <>
+            <p>Successfully sent the order!</p>
+            <div className={classes.actions}>
+                <button className={classes['button--alt']} onClick={props.onClose}>
+                    Close
+                </button>
+            </div>
+        </>
+    );
+    return (
+        <Modal onClose={props.onClose}>
+            {!isSubmiting && !didSubmit && cartModalContent}
+            {isSubmiting && submitingModalContent}
+            {didSubmit && didSubmitModalContent}
         </Modal>
     );
 };

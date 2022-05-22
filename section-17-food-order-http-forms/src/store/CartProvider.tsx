@@ -17,7 +17,7 @@ export interface MealOrder {
     price: number;
 }
 
-type ReducerAction = { type: 'ADD'; item: MealOrder } | { type: 'REMOVE'; id: string };
+type ReducerAction = { type: 'ADD'; item: MealOrder } | { type: 'REMOVE'; id: string } | { type: 'CLEAR' };
 
 const defaultCartState: CartState = {
     items: [],
@@ -63,6 +63,8 @@ const cartReducer = (state: CartState, action: ReducerAction): CartState => {
                 items: updatedItems,
                 totalAmount: updatedTotalAmount,
             };
+        case 'CLEAR':
+            return defaultCartState;
     }
     return defaultCartState;
 };
@@ -76,11 +78,15 @@ export const CartProvider = (props: Props) => {
     const removeItemFromCart = (id: string) => {
         dispatchCartAction({ type: 'REMOVE', id: id });
     };
+    const clearCartHandler = () => {
+        dispatchCartAction({ type: 'CLEAR' });
+    };
     const cartContext = {
         items: cartState.items,
         totalAmount: cartState.totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCart,
+        clearCart: clearCartHandler,
     };
     return <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>;
 };
